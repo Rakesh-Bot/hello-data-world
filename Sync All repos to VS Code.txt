@@ -1,0 +1,101 @@
+Method 1 – Using VS Code GitHub Extension (Best Way)
+
+Install extensions in Visual Studio Code:
+
+Step 1 – Install Extensions
+
+Open Extensions and install:
+
+GitHub Pull Requests and Issues
+GitHub Repositories
+GitLens (optional)
+
+These are from Microsoft and integrate directly with GitHub.
+
+Step 2 – Sign in to GitHub in VS Code
+Press Ctrl + Shift + P
+Type:
+GitHub: Sign in
+Authorize in browser
+Step 3 – Clone Repositories
+
+Press:
+Ctrl + Shift + P
+Git: Clone
+
+Then enter:
+
+https://github.com/<your-username>
+
+VS Code will show repo list → select repos → choose folder.
+
+They will appear in Explorer.
+
+Method 2 – Clone All Repositories Using Script (DevOps Way)
+
+If you have many repos, use this method.
+
+Step 1 – Generate GitHub Token
+
+Go to GitHub → Settings → Developer Settings → Personal Access Token.
+
+Step 2 – Install GitHub CLI
+sudo apt install gh
+gh auth login
+Step 3 – Clone All Repos
+
+Run:
+
+gh repo list <your-username> --limit 1000 | awk '{print $1}' | while read repo; do
+    gh repo clone $repo
+done
+
+This will clone all repositories into current folder.
+
+Then open folder in VS Code:
+
+code .
+
+Now all repos will appear in Explorer panel.
+
+Method 3 – Manual Bulk Clone (Simple)
+
+Create folder:
+
+mkdir ~/github-repos
+cd ~/github-repos
+
+Clone repos:
+
+git clone https://github.com/username/repo1.git
+git clone https://github.com/username/repo2.git
+git clone https://github.com/username/repo3.git
+
+Open in VS Code:
+
+code ~/github-repos
+
+Explorer will show:
+
+github-repos
+   repo1
+   repo2
+   repo3
+   
+Pro DevOps Setup (Recommended Structure)
+
+Use this folder structure:
+
+~/Documents/codespace/
+    github/
+    bitbucket/
+    gitlab/
+
+Then open codespace in VS Code → All repos visible.
+
+Summary
+Method	Use case
+VS Code GitHub extension	Easy
+gh CLI script	Many repos
+Manual clone	Few repos
+codespace folder	Best structure
